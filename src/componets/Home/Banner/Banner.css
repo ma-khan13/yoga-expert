@@ -18,8 +18,16 @@
 }
 .all-service-btn{
     border: none;
-    padding: 15px 50px;
+    padding: 10px 50px;
     border-radius: 50px;
+    color: rgb(100, 98, 68);
     margin-top: 50px;
-    /* justify-content: center; */
+    border: 2px solid rgb(190, 182, 182);
+    background: rgba(218, 233, 233, 0.5);
+    transition: all .5s;
+}
+.all-service-btn:hover{
+    color: white;
+    background-color: rgba(73, 167, 167, 0.605);
+    border: 2px solid rgb(41, 174, 192);
 }
