@@ -21,9 +21,7 @@ const Signup = () => {
     let password = passwordRef.current.value;
     await createUserWithEmailAndPassword(email, password);
     await sendEmailVerification();
-    console.log(sending);
-    console.log(error);
-    // navigate("/");
+    navigate("/");
   };
     return (
       <Container>

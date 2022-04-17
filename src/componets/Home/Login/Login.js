@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import { Col, Container, Form, Row } from 'react-bootstrap';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase/firebase.init';
 
@@ -18,6 +18,14 @@ const Login = () => {
     let password = passwordRef.current.value;
     signInWithEmailAndPassword(email, password);
     navigate("/");
+  };
+  const [sendPasswordResetEmail, sending, resetEmailError] =
+    useSendPasswordResetEmail(auth);
+  
+  let handleForgot = async () => {
+    let email = emailRef.current.value;
+    await sendPasswordResetEmail(email);
+    console.log(sending);
   };
     return (
       <Container>
@@ -43,6 +51,10 @@ const Login = () => {
                   required
                 />
               </Form.Group>
+              <Button variant="link" onClick={handleForgot}>
+                Forgot your password?
+              </Button>
+              <br />
               <button
                 onClick={handleLogInForm}
                 className="all-service-btn mt-2 text-uppercase"
