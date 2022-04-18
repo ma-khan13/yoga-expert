@@ -4,7 +4,7 @@ import { Card, Col, Button, ListGroup } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 
 const Service = ({ service }) => {
-  let { title, description, duration, start_on, course_fee, picture } = service;
+  let {id, title, description, duration, start_on, course_fee, picture } = service;
   let navigate = useNavigate()
     return (
       <Col md={4}>
@@ -22,7 +22,7 @@ const Service = ({ service }) => {
               </ListGroup.Item>
             </ListGroup>
           </Card.Body>
-          <Button onClick={()=> navigate('/checkout')} className="text-uppercase py-2">Start whit me</Button>
+          <Button onClick={()=> navigate(`/checkout/${id}`)} className="text-uppercase py-2">Start whit me</Button>
         </Card>
       </Col>
     );
