@@ -1,40 +1,48 @@
-import React, { useRef } from 'react';
+import React, { useRef} from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase/firebase.init';
 import toast, { Toaster } from "react-hot-toast";
+import SocialLogin from '../../SocialLogin/SocialLogin';
 
 const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();
-    const emailRef = useRef("");
+  const emailRef = useRef("");
   const passwordRef = useRef("");
   
-  const [signInWithEmailAndPassword, user,error] =
+  const [signInWithEmailAndPassword, user,loading,error] =
     useSignInWithEmailAndPassword(auth);
-  
-  let handleLogInForm = async (event) => {
+
+  let handleLogInForm =async (event) => {
     event.preventDefault();
     let email = emailRef.current.value;
     let password = passwordRef.current.value;
     await signInWithEmailAndPassword(email, password);
-    console.log(from);
-    navigate(from , {replace: true})
+    
   };
+  let signinError; 
+  if (error) {
+    signinError = error?.message;
+  }
+  if (user) {
+    navigate(from, { replace: true });
+  }
+
   const [sendPasswordResetEmail, sending, resetEmailError] =
     useSendPasswordResetEmail(auth);
   
   let handleForgot = async () => {
     let email = emailRef.current.value;
     await sendPasswordResetEmail(email);
-    toast("Chake your email send reset email");
+    toast("Please check your email sent a mail");
   };
 
 
     return (
-      <Container>
+      <Container style={{ height: "100vh" }}>
         <Row>
           <Col md={6} className="mx-auto">
             <h2 className="mt-3 mb-4 text-uppercase">Welcome back</h2>
@@ -56,6 +64,7 @@ const Login = () => {
                   placeholder="Password"
                   required
                 />
+                <p className="text-danger">{signinError}</p>
               </Form.Group>
               <Button variant="link" onClick={handleForgot}>
                 Forgot your password?
@@ -81,6 +90,7 @@ const Login = () => {
                 },
               }}
             />
+            <SocialLogin></SocialLogin>
           </Col>
         </Row>
       </Container>

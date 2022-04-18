@@ -10,7 +10,7 @@ const Header = () => {
   let handleSignOut = () => {
     signOut(auth);
     };
-  
+   let userName = auth?.currentUser?.displayName;
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
@@ -20,7 +20,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#services">Services</Nav.Link>
+              <Nav.Link>Services</Nav.Link>
               <Nav.Link as={Link} to="/about">
                 About
               </Nav.Link>
@@ -29,10 +29,12 @@ const Header = () => {
               </Nav.Link>
             </Nav>
             <Nav>
-              {user ?
-                <Nav.Link onClick={handleSignOut}>
-                  LogOut
-                </Nav.Link> : (
+              {user ? (
+                <>
+                  <Nav.Link>{userName ? userName : ''}</Nav.Link>
+                  <Nav.Link onClick={handleSignOut}>LogOut</Nav.Link>
+                </>
+              ) : (
                 <>
                   <Nav.Link as={Link} to="/login">
                     LogIn

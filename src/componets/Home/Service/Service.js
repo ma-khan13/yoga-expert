@@ -18,11 +18,16 @@ const Service = ({ service }) => {
               <ListGroup.Item>Duration : {duration}</ListGroup.Item>
               <ListGroup.Item>Start on : {start_on}</ListGroup.Item>
               <ListGroup.Item>
-                <h2 className='mb-0'>Price : {course_fee}</h2>
+                <h2 className="mb-0">Price : {course_fee}</h2>
               </ListGroup.Item>
             </ListGroup>
           </Card.Body>
-          <Button onClick={()=> navigate(`/checkout/${id}`)} className="text-uppercase py-2">Start whit me</Button>
+          <Button
+            onClick={() => navigate(`/checkout/${id}`)}
+            className="text-uppercase py-2"
+          >
+            Start whit me
+          </Button>
         </Card>
       </Col>
     );
