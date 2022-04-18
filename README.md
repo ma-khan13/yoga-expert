@@ -1,7 +1,13 @@
 # Getting Started with Create React App
+# Yoga Exprat
+Live website link [yoga exprat](https://yoga-expert.web.app/).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+- React Bootstrap
+- firebase Authentication
+- Fully Responsive
+- Firebase Hosting
+- Private Route
 ## Available Scripts
 
 In the project directory, you can run:
