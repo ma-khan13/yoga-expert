@@ -3,6 +3,7 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase/firebase.init';
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Login = () => {
   let handleForgot = async () => {
     let email = emailRef.current.value;
     await sendPasswordResetEmail(email);
-    console.log(sending);
+    toast("Chake your email send reset email");
   };
     return (
       <Container>
@@ -66,6 +67,16 @@ const Login = () => {
             <p className="mt-2">
               Create a new account, <Link to={"/signup"}>Please SignUp</Link>
             </p>
+            <Toaster
+              position="top-center"
+              toastOptions={{
+                duration: 5000,
+                style: {
+                  background: "green",
+                  color: "#fff",
+                }
+              }}
+            />
           </Col>
         </Row>
       </Container>
