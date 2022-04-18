@@ -9,6 +9,7 @@ import Signup from './componets/Home/Signup/Signup';
 import RequireAuth from './componets/RequireAuth/RequireAuth';
 import CheckOut from './componets/Home/CheckOut/CheckOut';
 import Footer from './componets/Shared/Footer/Footer';
+import NotFound from './componets/Home/NotFound/NotFound';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/blog" element={<Blog></Blog>}></Route>
         <Route path="/signup" element={<Signup></Signup>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
+        <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
     </div>

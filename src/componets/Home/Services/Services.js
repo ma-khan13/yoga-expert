@@ -9,7 +9,7 @@ const Services = () => {
             .then(data => setServices(data))
     },[])
     return (
-      <Row className="g-4 my-5" >
+      <Row id='services' className="g-4 my-5" >
         <h1>Services</h1>
         {services.slice(0, 4).map((service) => (
           <Service service={service} key={service.id}></Service>
