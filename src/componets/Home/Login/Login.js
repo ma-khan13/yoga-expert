@@ -1,11 +1,13 @@
 import React, { useRef } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase/firebase.init';
 import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();
     const emailRef = useRef("");
   const passwordRef = useRef("");
@@ -13,12 +15,13 @@ const Login = () => {
   const [signInWithEmailAndPassword, user,error] =
     useSignInWithEmailAndPassword(auth);
   
-  let handleLogInForm = (event) => {
+  let handleLogInForm = async (event) => {
     event.preventDefault();
     let email = emailRef.current.value;
     let password = passwordRef.current.value;
-    signInWithEmailAndPassword(email, password);
-    navigate("/");
+    await signInWithEmailAndPassword(email, password);
+    console.log(from);
+    navigate(from , {replace: true})
   };
   const [sendPasswordResetEmail, sending, resetEmailError] =
     useSendPasswordResetEmail(auth);
@@ -28,12 +31,14 @@ const Login = () => {
     await sendPasswordResetEmail(email);
     toast("Chake your email send reset email");
   };
+
+
     return (
       <Container>
         <Row>
           <Col md={6} className="mx-auto">
             <h2 className="mt-3 mb-4 text-uppercase">Welcome back</h2>
-            <Form>
+            <Form onSubmit={handleLogInForm}>
               <Form.Group className="mb-3" controlId="formGroupEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
@@ -57,7 +62,6 @@ const Login = () => {
               </Button>
               <br />
               <button
-                onClick={handleLogInForm}
                 className="all-service-btn mt-2 text-uppercase"
                 type="submit"
               >
@@ -74,7 +78,7 @@ const Login = () => {
                 style: {
                   background: "green",
                   color: "#fff",
-                }
+                },
               }}
             />
           </Col>
