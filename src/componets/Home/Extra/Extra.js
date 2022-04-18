@@ -1,11 +1,12 @@
 import React from 'react';
 import { Accordion, Col, Container, Row } from 'react-bootstrap';
 
-const About = () => {
+const Extra = () => {
     return (
-      <Container className='pb-5'>
-        <h1 className='mt-5 mb-4'>The benefits of doing yoga</h1>
-        <Row>
+      <Container className="pb-5">
+        <h1 className="mt-5 mb-4">The benefits of doing yoga</h1>
+        <Row
+        >
           <Col>
             <Accordion defaultActiveKey="0">
               <Accordion.Item eventKey="0">
@@ -76,4 +77,4 @@ const About = () => {
     );
 };
 
-export default About;
+export default Extra;
